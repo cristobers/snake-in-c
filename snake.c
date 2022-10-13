@@ -46,6 +46,8 @@ int main()
 
     int barrierX = 60 ;
     int barrierY = (barrierX / 2) - 4;
+    int speed = 200;
+
     char keyboardInput;
 
     struct fruit fruit;
@@ -97,24 +99,24 @@ int main()
                 snakeState = DEAD;
         }
 
-        clear();
+        erase();
         switch(currentDir)
         {
             case UP:
                 snake.y--;
-                timeout(150);
+                timeout(speed);
                 break;
             case DOWN:
                 snake.y++;
-                timeout(150);
+                timeout(speed);
                 break;
             case LEFT:
                 snake.x--;
-                timeout(100);
+                timeout(speed / 2);
                 break;
             case RIGHT:
                 snake.x++;
-                timeout(100);
+                timeout(speed / 2);
                 break;
         }
 
@@ -130,12 +132,12 @@ int main()
             fruit.y = rand() % 23 + 1;
         }
 
-        drawBarrier(barrierX, barrierY);
-        drawFruit(fruit.x, fruit.y);
-        drawSnake(snake.x, snake.y);
+        drawBarrier(barrierX, barrierY, "-", "|");
+        drawFruit(fruit.x, fruit.y, "@");
+        drawSnake(snake.x, snake.y, "O");
 
         for (int k = 0; k < snake.score; k++)
-            mvprintw(snake.tailY[k], snake.tailX[k], "o");
+            mvprintw(snake.tailY[k], snake.tailX[k], "o"); // why does mvprintw go Y then X
 
         for (int i = 0; i < snake.score; i++)
         {
@@ -143,7 +145,7 @@ int main()
                 snakeState = DEAD;            
         }
 
-        mvprintw(barrierY,barrierX-10, "score: %d", snake.score);
+        mvprintw(barrierY, barrierX-10, "score: %d", snake.score);
         fflush(stdout);
 
     }
@@ -161,27 +163,27 @@ void cursesInit()
     timeout(100);
 }
 
-void drawBarrier(int xSize, int ySize)
+void drawBarrier(int xSize, int ySize, char horizontalChar[], char verticalChar[])
 {
     for (int i = 0; i <= xSize; i++) 
     {
-        mvprintw(0, i, "-");
-        mvprintw(ySize, i, "-");
+        mvprintw(0, i, horizontalChar);
+        mvprintw(ySize, i, horizontalChar);
     }
 
-    for (int i = 0; i <= ySize; i++) // Y 15
+    for (int i = 0; i <= ySize; i++) 
     {
-        mvprintw(i, 0, "|");
-        mvprintw(i, xSize, "|");
+        mvprintw(i, 0, verticalChar);
+        mvprintw(i, xSize, verticalChar);
     }
 }
 
-void drawFruit(int xPos, int yPos)
+void drawFruit(int xPos, int yPos, char fruitIcon[])
 {
-    mvprintw(yPos, xPos, "8");
+    mvprintw(yPos, xPos, fruitIcon);
 }
 
-void drawSnake(int xPos, int yPos)
+void drawSnake(int xPos, int yPos, char snakeHeadIcon[])
 {
-    mvprintw(yPos,xPos, "O");
+    mvprintw(yPos,xPos, snakeHeadIcon);
 }
