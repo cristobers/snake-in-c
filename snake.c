@@ -46,7 +46,7 @@ int main()
 
     int barrierX = 60 ;
     int barrierY = (barrierX / 2) - 4;
-    int speed = 200;
+    int speed = 200; // this is ms, the game refreshes every 0.2 seconds
 
     char keyboardInput;
 
