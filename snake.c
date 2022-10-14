@@ -167,23 +167,23 @@ void drawBarrier(int xSize, int ySize, char horizontalChar[], char verticalChar[
 {
     for (int i = 0; i <= xSize; i++) 
     {
-        mvprintw(0, i, horizontalChar);
-        mvprintw(ySize, i, horizontalChar);
+        mvprintw(0, i, "%s", horizontalChar);
+        mvprintw(ySize, i, "%s", horizontalChar);
     }
 
     for (int i = 0; i <= ySize; i++) 
     {
-        mvprintw(i, 0, verticalChar);
-        mvprintw(i, xSize, verticalChar);
+        mvprintw(i, 0, "%s", verticalChar);
+        mvprintw(i, xSize, "%s", verticalChar);
     }
 }
 
 void drawFruit(int xPos, int yPos, char fruitIcon[])
 {
-    mvprintw(yPos, xPos, fruitIcon);
+    mvprintw(yPos, xPos, "%s", fruitIcon);
 }
 
 void drawSnake(int xPos, int yPos, char snakeHeadIcon[])
 {
-    mvprintw(yPos,xPos, snakeHeadIcon);
+    mvprintw(yPos,xPos, "%s", snakeHeadIcon);
 }
